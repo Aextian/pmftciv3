@@ -5,9 +5,7 @@ import { Head } from "@inertiajs/react";
 
 const AdminLayouts: React.FC<PropsWithChildren> = ({ children }) => {
 
-    const [isOpen, setIsOpen] = useState(false);
-
-   
+    const [isOpen, setIsOpen] = useState(false);   
 
     return (
         <>
@@ -23,11 +21,11 @@ const AdminLayouts: React.FC<PropsWithChildren> = ({ children }) => {
 
             <Header isOpen={isOpen} setIsOpen={setIsOpen} />
 
-            <div className="flex flex-row ">
+            <div className="flex justify-center">
 
                 <Sidebar isOpen={isOpen}/>
               
-                <main className="flex-1">{children}</main>
+                <main className="mx-6 my-5">{children}</main>
 
             </div>
             

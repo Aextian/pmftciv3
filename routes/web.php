@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Auth\Admin\AdminAuthController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,8 @@ use Inertia\Inertia;
 |
 */
 
+
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -26,21 +29,39 @@ Route::get('/', function () {
     ]);
 });
 
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Log in
+Route::post('admin-login', [AdminAuthController::class, 'loginUser'])->name('admin-login');
 
 
+
+// Route::get('/dashboard', function () {
+
+//     // return Inertia::render('Dashboard');
+
+            
+//     $admin = auth()->guard('admin')->user();
+        
+//     return Inertia::render('Test',[ 'admin' => $admin]);
+
+    
+// })->name('Tesaxt');
+
+
+// Route::get('/dashboard', function () {
+//     return Inertia::render('Dashboard');
+
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+
+
+
+// route::resource('admin', AdminController::class);
 
 
 
 
 Route::middleware('auth')->group(function () {
-
-    route::resource('admin', AdminController::class);
-
-
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
